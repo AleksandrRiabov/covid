@@ -1,56 +1,38 @@
-import React from 'react';
-import { useTheme } from '@material-ui/core/styles';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
-import { Typography } from '@material-ui/core';
+import { useGloabalConext } from "../../context/globalContext";
+import {Line, Bar} from "react-chartjs-2";
 
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
+import styles from "./Chart.module.css";
+
+const Cards = () =>  {
+   const {dailyData} = useGloabalConext();
+   console.log()
+   const LineChart = (
+      dailyData.length? 
+       <Line 
+       data={{
+          labels: dailyData.map(({date}) => date), 
+          datasets: [{
+             data: dailyData.map(({confirmed}) => confirmed),
+             label: "Infected",
+             borderColor: "#3333ff",
+             fill: true
+          },{
+             data:dailyData.map(({deaths}) => deaths), 
+             label: "Deaths",
+             borderColor: "red",
+             backgroundColor: "rgba(255,0,0,0.5)",
+             fill: true
+          }]
+       }}
+       /> : null
+   );
+
+   return (
+      <div className={styles.container}>
+         {LineChart }
+      </div>
+   )
 }
 
-const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00', undefined),
-];
+export default Cards
 
-export default function Chart() {
-  const theme = useTheme();
-
-  return (
-    <React.Fragment>
-      <Typography component="h2" variant="h6" color="primary" gutterBottom>
-      Title
-    </Typography>
-      <ResponsiveContainer>
-        <LineChart
-          data={data}
-          margin={{
-            top: 16,
-            right: 16,
-            bottom: 0,
-            left: 24,
-          }}
-        >
-          <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
-          <YAxis stroke={theme.palette.text.secondary}>
-            <Label
-              angle={270}
-              position="left"
-              style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
-            >
-              Sales ($)
-            </Label>
-          </YAxis>
-          <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />
-        </LineChart>
-      </ResponsiveContainer>
-    </React.Fragment>
-  );
-}
