@@ -4,8 +4,8 @@ import {Line, Bar} from "react-chartjs-2";
 import styles from "./Chart.module.css";
 
 const Cards = () =>  {
-   const {dailyData} = useGloabalConext();
-   console.log()
+   const {dailyData, selectedCountry, data:{confirmed, recovered, deaths}} = useGloabalConext();
+
    const LineChart = (
       dailyData.length? 
        <Line 
@@ -27,9 +27,28 @@ const Cards = () =>  {
        /> : null
    );
 
+
+   const BarChart = confirmed ? (
+      <Bar
+      data={{
+         labels: ["Infected", "Recovered", "Deaths"],
+         datasets: [{
+            label: "People",
+            backgroundColor: ["rgba(0,0,255,0.5)","rgba(0,255,0,0.5)","rgba(255,0,0,0.5)"],
+            data: [confirmed.value, recovered.value, deaths.value],
+         }], 
+      }}
+      options={{
+         legent: {display: false},
+         title: {display: true, text: `Current situation in ${selectedCountry}`}
+      }}
+      />
+   ): null;
+
+   
    return (
       <div className={styles.container}>
-         {LineChart }
+         {selectedCountry === "global" ? LineChart: BarChart }
       </div>
    )
 }

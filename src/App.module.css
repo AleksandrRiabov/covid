@@ -8,3 +8,38 @@ body{
    align-items: center;
    flex-direction: column;
 }
+
+.covid{
+   width: 150px;
+   position: absolute;
+   top: 0;
+   right:0;
+   z-index: -1;
+   animation: rotateCovid 500s infinite ease;
+}
+
+.titleContainer{
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   position: relative;
+   width: 320px;
+   height: 150px;
+   overflow: hidden;
+   margin-top: 20px;
+}
+
+.titleContainer h1{
+   padding-right: 140px;
+   font-family: sans-serif !important;
+   color: #020 !important;
+   letter-spacing: 1px;
+}
+@keyframes rotateCovid {
+   from {
+      transform: rotate(5deg);
+   }
+   to {
+      transform: rotate(3600deg);
+   }
+}

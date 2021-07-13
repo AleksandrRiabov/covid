@@ -1,17 +1,31 @@
-import {Cards, Chart, CountryPicker }from "./components"
+import {Cards, Chart, CountryPicker, Footer, Loader}from "./components"
 import styles from "./App.module.css"
-import {AppProvider} from "./context/globalContext";
+import covid from "./images/covid.png";
+import { useGloabalConext } from "./context/globalContext";
 
 
 const App = () => {
+const {data} = useGloabalConext();
+
+if(!data.confirmed){
+  return ( 
+    <div className={styles.container}>
+      <Loader />
+    </div>
+    )
+}
   return (
-    <AppProvider>
-      <div className={styles.container}>
+    <Footer>
+         <div className={styles.container}>
+          <div  className={styles.titleContainer}>
+              <h1>COVID-19 </h1>
+              <img className={styles.covid} src={covid} alt="Covid"/>
+          </div>
           <Cards />
           <CountryPicker /> 
           <Chart />
       </div>
-    </AppProvider>
+    </Footer>
   );
 }
 

@@ -3,12 +3,13 @@ import { useGloabalConext } from "../../context/globalContext";
 import { Card, Typography, Grid, CardContent } from "@material-ui/core";
 import CountUp from "react-countup";
 import cx from "classnames";
+import Loader from "../Loader/Loader";
 
 const Cards = () =>  {
    const {data: {confirmed, recovered, deaths, lastUpdate}} = useGloabalConext();
 
    if (!confirmed){
-      return "Loading.."
+      return <Loader />
    }
    const date = new Date(lastUpdate).toLocaleDateString();
 
@@ -26,7 +27,7 @@ const Cards = () =>  {
                         separator=","/>
                    </Typography>
                    <Typography color="textSecondary" gutterBottom>{date}</Typography>
-                   <Typography variant="body2"  gutterBottom>Number of active cases..</Typography>
+                   <Typography variant="body2"  gutterBottom>Total infected cases..</Typography>
                 </CardContent>
              </Grid>
              <Grid xs={12} md={3} className={cx(styles.recovered, styles.card)} item component={Card}>

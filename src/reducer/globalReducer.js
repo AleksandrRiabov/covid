@@ -5,7 +5,10 @@ const globalReducer = (state, action ) => {
 			return {...state, fetchedData: action.payload}	
       case "SET DAILY DATA": 
          return {...state, fetchedDailyData: action.payload}	
-
+      case "SET COUNTRIES LIST": 
+         return {...state, fetchedCountriesList: action.payload}
+      case "SET SELECTED COUNTRY": 
+         return {...state, selectedCountry: action.payload}
 		default: 
 			return state;
 	}
