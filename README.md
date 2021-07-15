@@ -1,3 +1,12 @@
+# To see project on Github pages:
+
+USE THIS LINK [https://aleksandrriabov.github.io/covid/]
+
+ # COVID-19 <img src="https://aleksandrriabov.github.io/covid/static/media/covid.3638f356.png" alt="COVID-19" target="blank" width="100px">
+
+# =====================
+# =====================
+# =====================
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
