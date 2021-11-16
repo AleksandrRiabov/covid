@@ -7,5 +7,4 @@
  # Basic React Application, which use API to display COVID-19 Statistic for different countries.
 
 # =====================
-# =====================
-# =====================
+
